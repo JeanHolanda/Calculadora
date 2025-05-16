@@ -21,11 +21,19 @@ section{
 
 .result{
     height: 80px;
-    padding: 10% 10px 0 95%;
+    padding: 20px 10px 0 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 #display{
-    direction: rtl;
+    direction: ltr;
+    text-align: right;
+    unicode-bidi: plaintext;
+    font-size: 2rem;
+    white-space: nowrap;
+    overflow-x: auto;
 }
 
 .calculation{

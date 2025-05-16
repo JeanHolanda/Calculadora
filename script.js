@@ -1,5 +1,6 @@
 const numberButtons = document.querySelectorAll("[id^='number']")
 const operatorButtons = document.querySelectorAll(".operator")
+const invisibleOperators = document.querySelectorAll(".invisible-operator")
 const clearButton = document.querySelector("#clear")
 const display = document.querySelector("#display")
 const sum = document.querySelector("#sum")
@@ -12,25 +13,40 @@ const equal = document.querySelector("#equal")
 const squareRoot = document.querySelector("#square-root")
 const point = document.querySelector("#point")
 
-console.log(operatorButtons)
+console.log(invisibleOperators)
 
 numberButtons.forEach(button => {
     button.addEventListener("click", (e) => {
-        if(display.textContent === "0"){
+        if (display.textContent === "0") {
             display.textContent = e.target.value
-        }else{
+        } else {
             display.textContent += e.target.value
         }
-    
+
     })
 })
 
-clearButton.addEventListener("click", () =>{
+clearButton.addEventListener("click", () => {
     display.textContent = "0"
 })
 
-operatorButtons.forEach(button =>{
-    button.addEventListener ("click", (e) => {
-        display.textContent += e.target.value
+operatorButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+        const current = display.textContent
+        const value = e.target.value
+
+        if (current !== "0" && !isLastCharOperator(current)) {
+            display.textContent += value
+        }
+    })
+})
+
+function isLastCharOperator(text) {
+    return /[+\-*/%]$/.test(text)
+}
+
+invisibleOperators.forEach(button => {
+    button.addEventListener("click", () => {
+        display.textContent = "3"
     })
 })
